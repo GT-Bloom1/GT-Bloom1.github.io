@@ -7,174 +7,30 @@
 <meta name="description" content="Academic homepage of GT-Bloom1 — Spiking Neural Networks, Spiking Transformer, Efficient AI.">
 <meta name="author" content="GT-Bloom1">
 <link rel="icon" href="https://github.com/GT-Bloom1.png">
-<style>
-  :root{
-    --bg:#0d1117; --card:#161b22; --line:#2b3138; --line-soft:#22272e;
-    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --accent-soft:#162230;
-    --tag-bg:#122d4d; --tag-border:#1f4e8c;
-    --serif:"Source Serif Pro",Georgia,"Times New Roman","Songti SC",serif;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
-  }
-  html[data-theme="light"]{
-    --bg:#ffffff; --card:#f6f8fa; --line:#e3e6ea; --line-soft:#f0f2f4;
-    --text:#1a1a1a; --muted:#5b6470; --accent:#1c4f82; --accent-soft:#eef3f9;
-    --tag-bg:#eef3f9; --tag-border:#d7e2ee;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
-       font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
-  .wrap{max-width:900px;margin:0 auto;padding:0 24px 48px}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-
-  /* ---------- Top nav ---------- */
-  nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);
-      backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
-  .nav-inner{max-width:900px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:22px}
-  .nav-inner .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--text)}
-  .nav-inner .brand:hover{text-decoration:none;color:var(--accent)}
-  .nav-inner .links{display:flex;gap:18px;margin-left:auto;font-size:14px;flex-wrap:wrap}
-  .nav-inner .links a{color:var(--muted)}
-  .nav-inner .links a:hover{color:var(--accent);text-decoration:none}
-  .theme-btn{margin-left:14px;border:1px solid var(--line);background:var(--card);color:var(--muted);
-             border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:15px;line-height:1}
-  .theme-btn:hover{color:var(--accent);border-color:var(--accent)}
-
-  /* ---------- Header ---------- */
-  header{display:flex;gap:36px;align-items:center;padding:64px 0 30px;border-bottom:1px solid var(--line)}
-  .avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;flex-shrink:0;
-          border:2px solid var(--line)}
-  h1{font-family:var(--serif);font-size:34px;margin:0 0 6px;letter-spacing:-.2px}
-  .headline{margin:0 0 10px;font-size:16px;color:var(--muted)}
-  .affil{margin:0;font-size:14.5px}
-  .affil .org{font-weight:600}
-  .btnrow{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-  .btn{border:1px solid var(--line);border-radius:6px;padding:6px 15px;font-size:13.5px;
-       color:var(--text);background:var(--card)}
-  .btn:hover{border-color:var(--accent);text-decoration:none}
-
-  /* ---------- Sections ---------- */
-  section{margin-top:48px}
-  h2{font-family:var(--serif);font-size:21px;margin:0 0 18px;padding-bottom:8px;
-     border-bottom:1px solid var(--line);letter-spacing:.2px}
-  h2 .note{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:400;margin-left:8px}
-  p{margin:0 0 12px}
-
-  /* News */
-  .news{margin:0;padding:0;list-style:none;font-size:14.5px}
-  .news li{padding:8px 0;border-bottom:1px solid var(--line-soft);display:flex;gap:16px}
-  .news li:last-child{border-bottom:none}
-  .news .date{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-
-  /* Tags */
-  .tags{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
-  .tags li{background:var(--tag-bg);color:var(--accent);border:1px solid var(--tag-border);
-           border-radius:4px;padding:3px 12px;font-size:13px}
-
-  /* Publications */
-  .pub{display:flex;gap:18px;padding:18px 0;border-bottom:1px dashed var(--line)}
-  .pub:last-child{border-bottom:none}
-  .pub .thumb{width:118px;height:78px;flex-shrink:0;border:1px solid var(--line);
-              border-radius:5px;background:var(--card);display:flex;align-items:center;
-              justify-content:center;font-size:11px;color:var(--muted);text-align:center;overflow:hidden}
-  .pub .thumb img{width:100%;height:100%;object-fit:cover}
-  .pub .body{flex:1}
-  .pub .title{font-weight:600;margin:0 0 3px;font-size:15.5px}
-  .pub .authors{margin:0;font-size:14px;color:var(--muted)}
-  .pub .authors strong{color:var(--text);font-weight:600}
-  .pub .venue{margin:2px 0 0;font-size:14px;color:var(--muted)}
-  .pub .venue i{font-style:italic}
-  .pub .links{margin-top:6px;font-size:13px;display:flex;gap:14px}
-  .selected{display:inline-block;font-size:11px;letter-spacing:.5px;color:#c9a34c;
-            border:1px solid #6b5a2a;background:#2d2712;border-radius:3px;
-            padding:0 6px;vertical-align:2px;margin-left:6px}
-  html[data-theme="light"] .selected{color:#8a6d3b;background:#fcf8e3;border-color:#f0e2bd}
-
-  /* Projects */
-  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .proj{border:1px solid var(--line);border-radius:8px;padding:18px 20px;background:var(--card)}
-  .proj h3{margin:0 0 6px;font-size:16px;font-family:var(--serif)}
-  .proj h3 a{color:var(--text)}
-  .proj h3 a:hover{color:var(--accent);text-decoration:none}
-  .proj p{margin:0;font-size:14px;color:var(--muted)}
-
-  /* Skills */
-  .skill-row{display:flex;gap:14px;padding:8px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px}
-  .skill-row:last-child{border-bottom:none}
-  .skill-row .cat{width:110px;flex-shrink:0;color:var(--muted)}
-  .skill-row .val{flex:1}
-
-  /* Timeline entries */
-  .entry{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
-  .entry:last-child{border-bottom:none}
-  .entry .main{font-size:15px}
-  .entry .main span.org{font-weight:600}
-  .entry .sub{font-size:13.5px;color:var(--muted)}
-  .entry .when{font-size:13.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-
-  /* Blog */
-  .post{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
-  .post:last-child{border-bottom:none}
-  .post .date{color:var(--muted);font-size:13.5px;white-space:nowrap}
-
-  code{background:var(--card);border:1px solid var(--line-soft);padding:1px 6px;border-radius:4px;font-size:13px}
-
-  /* Progress bars & stats */
-  .bars{margin:0 0 16px;padding:0;list-style:none}
-  .bars li{padding:9px 0;font-size:14.5px}
-  .bar-head{display:flex;justify-content:space-between;margin-bottom:5px}
-  .bar-head .num{color:var(--muted);font-variant-numeric:tabular-nums}
-  .bar{height:9px;border-radius:5px;background:var(--card);border:1px solid var(--line-soft);overflow:hidden}
-  .bar>i{display:block;height:100%;background:linear-gradient(90deg,#3fb950,#58a6ff)}
-  .kw{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin:0;padding:0;list-style:none}
-  .kw li{font-size:14.5px;color:var(--muted)}
-  .kw b{color:var(--text);font-weight:600}
-  .stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .stat-cards img{width:100%;border:1px solid var(--line);border-radius:8px}
-
-  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
-         font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-
-  @media (max-width:680px){
-    header{flex-direction:column;text-align:center;padding-top:40px}
-    .btnrow{justify-content:center}
-    .nav-inner .links{display:none}
-    .proj-grid{grid-template-columns:1fr}
-    .pub{flex-direction:column;gap:10px}
-    .pub .thumb{width:100%;height:90px}
-    .entry,.post{flex-direction:column;gap:2px}
-    .skill-row{flex-direction:column;gap:2px}
-    .stat-cards,.kw{grid-template-columns:1fr}
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ================= NAV ================= -->
 <nav>
   <div class="nav-inner">
-    <a class="brand" href="#top">GT-Bloom1</a>
+    <a class="brand" href="index.html">GT-Bloom1</a>
     <div class="links">
-      <a href="#news">News</a>
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Projects</a>
-      <a href="#objective">求职</a>
-      <a href="#practice">刷题战绩</a>
-      <a href="#education">Education</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="publications.html">Publications</a>
+      <a href="projects.html">Projects</a>
+      <a href="career.html">求职</a>
+      <a href="practice.html">刷题战绩</a>
+      <a href="cv.html">履历</a>
+      <a href="blog.html">Blog</a>
     </div>
     <button class="theme-btn" onclick="toggleTheme()" title="切换明暗">◐</button>
   </div>
 </nav>
 
-<div class="wrap" id="top">
+<div class="wrap">
 
   <!-- ================= HEADER ================= -->
-  <header>
+  <header class="home">
     <img class="avatar" src="https://github.com/GT-Bloom1.png" alt="GT-Bloom1">
     <div>
       <h1>GT-Bloom1</h1>
@@ -230,188 +86,40 @@
     </ul>
   </section>
 
-  <!-- ================= PUBLICATIONS ================= -->
-  <section id="publications">
-    <h2>Publications <span class="note">* 表示共同一作；引用格式见各条 BibTeX</span></h2>
-
-    <div class="pub">
-      <div class="thumb">teaser / figure</div>
-      <div class="body">
-        <p class="title">Token Pruning for Spiking Transformers<span class="selected">Under Review</span></p>
-        <p class="authors"><strong>Your Name</strong>*, Coauthor A*, Advisor B</p>
-        <p class="venue"><i>Target: NeurIPS / ICLR</i>, 2026</p>
-        <p class="links"><a href="#">PDF</a><a href="#">Code</a><a href="#">arXiv</a><a href="#">BibTeX</a></p>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="thumb">teaser / figure</div>
-      <div class="body">
-        <p class="title">Efficient Spiking Representation Learning</p>
-        <p class="authors">Coauthor A, <strong>Your Name</strong>, Advisor B</p>
-        <p class="venue"><i>Conference / Journal</i>, 2025</p>
-        <p class="links"><a href="#">PDF</a><a href="#">Code</a><a href="#">BibTeX</a></p>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="thumb">teaser / figure</div>
-      <div class="body">
-        <p class="title">A Survey on Energy-Efficient Neuromorphic Models</p>
-        <p class="authors"><strong>Your Name</strong>, Advisor B</p>
-        <p class="venue"><i>Preprint</i>, 2025</p>
-        <p class="links"><a href="#">arXiv</a><a href="#">BibTeX</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PROJECTS ================= -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="proj-grid">
-      <div class="proj">
-        <h3><a href="https://github.com/GT-Bloom1">Spiking Token Pruning</a></h3>
-        <p>在 Spikingformer 的 SpikingSelfAttention 上对 token 维度做剪枝，几乎不掉点的前提下显著降低 SOPs 与推理延迟。支持 CIFAR-10 / CIFAR-100 / ImageNet。</p>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/GT-Bloom1">SNN Benchmark Toolkit</a></h3>
-        <p>统一的脉冲网络能耗 / 延迟评测工具，支持多硬件后端估计。</p>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/GT-Bloom1">Project C</a></h3>
-        <p>一句话项目描述。</p>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/GT-Bloom1">Project D</a></h3>
-        <p>一句话项目描述。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= JOB OBJECTIVE ================= -->
-  <section id="objective">
-    <h2>Job Objective <span class="note">求职意向</span></h2>
-    <ul class="kw">
-      <li>意向岗位：<b>算法工程师（模型压缩 / 高效推理方向）</b></li>
-      <li>备选岗位：<b>研究实习生 / Research Intern（SNN · Efficient AI）</b></li>
-      <li>意向时间：<b>2027 暑期实习 / 2028 届校招</b></li>
-      <li>意向地点：<b>北上广深 · 杭州 · 可远程</b></li>
-      <li>到岗状态：<b>可实习 3–6 个月，每周 5 天</b></li>
-      <li>简历：<b><a href="#">PDF 下载</a></b></li>
-    </ul>
-  </section>
-
-  <!-- ================= CODING PRACTICE ================= -->
-  <section id="practice">
-    <h2>Coding Practice <span class="note">刷题 &amp; 战绩</span></h2>
-    <ul class="bars">
-      <li>
-        <div class="bar-head"><span>LeetCode 总题量</span><span class="num">300 / 500</span></div>
-        <div class="bar"><i style="width:60%"></i></div>
-      </li>
-      <li>
-        <div class="bar-head"><span>Easy</span><span class="num">150</span></div>
-        <div class="bar"><i style="width:75%;background:linear-gradient(90deg,#3fb950,#a4e19a)"></i></div>
-      </li>
-      <li>
-        <div class="bar-head"><span>Medium</span><span class="num">130</span></div>
-        <div class="bar"><i style="width:52%;background:linear-gradient(90deg,#d29922,#eac54f)"></i></div>
-      </li>
-      <li>
-        <div class="bar-head"><span>Hard</span><span class="num">20</span></div>
-        <div class="bar"><i style="width:40%;background:linear-gradient(90deg,#f85149,#ff8b85)"></i></div>
-      </li>
-    </ul>
-    <div class="entry"><div class="main">LeetCode 周赛 — 最高排名 <b>xxx</b> / Rating <b>1xxx</b></div><div class="when">2026</div></div>
-    <div class="entry"><div class="main">蓝桥杯 / CCPC / ICPC — <b>XX 省一等奖</b></div><div class="when">2024</div></div>
-    <div class="entry"><div class="main">牛客 / Codeforces — <b>最高 Rating xxxx (XXXX)</b></div><div class="when">2023</div></div>
-  </section>
-
-  <!-- ================= GITHUB STATS ================= -->
-  <section id="stats">
-    <h2>GitHub Stats <span class="note">自动统计，无需维护</span></h2>
-    <div class="stat-cards">
-      <img src="https://github-readme-stats.vercel.app/api?username=GT-Bloom1&show_icons=true" alt="GitHub stats" loading="lazy">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GT-Bloom1&layout=compact" alt="Top languages" loading="lazy">
-    </div>
-  </section>
-
-  <!-- ================= SKILLS ================= -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skill-row"><div class="cat">Languages</div><div class="val">Python, C/C++, Bash, LaTeX</div></div>
-    <div class="skill-row"><div class="cat">Frameworks</div><div class="val">PyTorch, SpikingJelly, timm, Hugging Face</div></div>
-    <div class="skill-row"><div class="cat">Tools</div><div class="val">Git, Linux, Slurm, WandB, Docker</div></div>
-    <div class="skill-row"><div class="cat">Others</div><div class="val">CUDA / GPU 集群训练, 实验管理</div></div>
-  </section>
-
-  <!-- ================= EDUCATION ================= -->
-  <section id="education">
-    <h2>Education</h2>
-    <div class="entry">
-      <div>
-        <div class="main"><span class="org">Your University</span> — M.S./Ph.D. in Computer Science</div>
-        <div class="sub">Advisor: Prof. Xxx · XXX Lab</div>
-      </div>
-      <div class="when">2025 — Present</div>
-    </div>
-    <div class="entry">
-      <div>
-        <div class="main"><span class="org">XXX University</span> — B.Eng. in Computer Science</div>
-        <div class="sub">GPA 3.x / 4.0 · 毕业论文：XXX</div>
-      </div>
-      <div class="when">2021 — 2025</div>
-    </div>
-  </section>
-
-  <!-- ================= AWARDS ================= -->
-  <section id="awards">
-    <h2>Awards &amp; Honors</h2>
-    <div class="entry"><div class="main">国家奖学金 / National Scholarship</div><div class="when">2024</div></div>
-    <div class="entry"><div class="main">优秀毕业生 / Outstanding Graduate</div><div class="when">2025</div></div>
-    <div class="entry"><div class="main">XXX 竞赛一等奖</div><div class="when">2023</div></div>
-  </section>
-
-  <!-- ================= EXPERIENCE ================= -->
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="entry">
-      <div>
-        <div class="main"><span class="org">XX 公司 / 实验室</span> — 研究实习生</div>
-        <div class="sub">参与 XXX 项目，负责模型压缩与部署。</div>
-      </div>
-      <div class="when">2024.06 — 2024.09</div>
-    </div>
-    <div class="entry">
-      <div>
-        <div class="main"><span class="org">XXX Lab</span> — 科研助理</div>
-        <div class="sub">SNN 训练流程搭建与实验复现。</div>
-      </div>
-      <div class="when">2023.09 — 2024.05</div>
-    </div>
-  </section>
-
-  <!-- ================= SERVICE ================= -->
-  <section id="service">
-    <h2>Academic Service</h2>
-    <div class="entry"><div class="main">Reviewer — <i>NeurIPS / ICLR / ICML / AAAI</i></div><div class="when">2026 —</div></div>
-    <div class="entry"><div class="main">Teaching Assistant — 《机器学习导论》</div><div class="when">2025 Fall</div></div>
-  </section>
-
-  <!-- ================= BLOG ================= -->
-  <section id="blog">
-    <h2>Blog <span class="note">学习笔记 / 论文阅读</span></h2>
-    <div class="post">
-      <div><a href="#">Spikingformer 代码结构精读：从 LIF 到 SpikingSelfAttention</a></div>
-      <div class="date">2026-09-20</div>
-    </div>
-    <div class="post">
-      <div><a href="#">Token 剪枝方法综述：从 ViT 到 Spiking Transformer</a></div>
-      <div class="date">2026-08-11</div>
-    </div>
-    <div class="post">
-      <div><a href="#">CIFAR-10 训练记录与复现细节</a></div>
-      <div class="date">2026-07-02</div>
+  <!-- ================= EXPLORE ================= -->
+  <section id="explore">
+    <h2>Explore</h2>
+    <div class="quick-grid">
+      <a class="quick" href="publications.html">
+        <h3>Publications</h3>
+        <p>论文列表、arXiv / 代码 / BibTeX</p>
+        <span class="arrow">查看 →</span>
+      </a>
+      <a class="quick" href="projects.html">
+        <h3>Projects</h3>
+        <p>开源项目与代码仓库</p>
+        <span class="arrow">查看 →</span>
+      </a>
+      <a class="quick" href="career.html">
+        <h3>求职意向</h3>
+        <p>意向岗位、时间地点、实习经历</p>
+        <span class="arrow">查看 →</span>
+      </a>
+      <a class="quick" href="practice.html">
+        <h3>刷题 &amp; 战绩</h3>
+        <p>LeetCode 进度、竞赛成绩、GitHub 统计</p>
+        <span class="arrow">查看 →</span>
+      </a>
+      <a class="quick" href="cv.html">
+        <h3>履历 CV</h3>
+        <p>教育经历、获奖、技能、学术服务</p>
+        <span class="arrow">查看 →</span>
+      </a>
+      <a class="quick" href="blog.html">
+        <h3>Blog</h3>
+        <p>学习笔记 / 论文阅读</p>
+        <span class="arrow">查看 →</span>
+      </a>
     </div>
   </section>
 
@@ -433,14 +141,6 @@
 
 </div>
 
-<script>
-  function toggleTheme(){
-    const el=document.documentElement;
-    const next=el.getAttribute('data-theme')==='dark'?'light':'dark';
-    el.setAttribute('data-theme',next);
-    try{localStorage.setItem('theme',next)}catch(e){}
-  }
-  (function(){try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
-</script>
+<script src="main.js"></script>
 </body>
 </html>
