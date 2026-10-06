@@ -1,96 +1,382 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GT-Bloom1 | Home</title>
+<title>GT-Bloom1 | Academic Homepage</title>
+<meta name="description" content="Academic homepage of GT-Bloom1 — Spiking Neural Networks, Spiking Transformer, Efficient AI.">
+<meta name="author" content="GT-Bloom1">
+<link rel="icon" href="https://github.com/GT-Bloom1.png">
 <style>
-  :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --border: #30363d;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --accent: #58a6ff;
+  :root{
+    --bg:#0d1117; --card:#161b22; --line:#2b3138; --line-soft:#22272e;
+    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --accent-soft:#162230;
+    --tag-bg:#122d4d; --tag-border:#1f4e8c;
+    --serif:"Source Serif Pro",Georgia,"Times New Roman","Songti SC",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-    line-height: 1.7;
+  html[data-theme="light"]{
+    --bg:#ffffff; --card:#f6f8fa; --line:#e3e6ea; --line-soft:#f0f2f4;
+    --text:#1a1a1a; --muted:#5b6470; --accent:#1c4f82; --accent-soft:#eef3f9;
+    --tag-bg:#eef3f9; --tag-border:#d7e2ee;
   }
-  .wrap { max-width: 800px; margin: 0 auto; padding: 64px 20px; }
-  header { text-align: center; margin-bottom: 48px; }
-  .avatar {
-    width: 110px; height: 110px; border-radius: 50%;
-    border: 2px solid var(--border);
-    object-fit: cover; background: var(--card);
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+       font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px 48px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- Top nav ---------- */
+  nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{max-width:900px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:22px}
+  .nav-inner .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--text)}
+  .nav-inner .brand:hover{text-decoration:none;color:var(--accent)}
+  .nav-inner .links{display:flex;gap:18px;margin-left:auto;font-size:14px;flex-wrap:wrap}
+  .nav-inner .links a{color:var(--muted)}
+  .nav-inner .links a:hover{color:var(--accent);text-decoration:none}
+  .theme-btn{margin-left:14px;border:1px solid var(--line);background:var(--card);color:var(--muted);
+             border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:15px;line-height:1}
+  .theme-btn:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- Header ---------- */
+  header{display:flex;gap:36px;align-items:center;padding:64px 0 30px;border-bottom:1px solid var(--line)}
+  .avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;flex-shrink:0;
+          border:2px solid var(--line)}
+  h1{font-family:var(--serif);font-size:34px;margin:0 0 6px;letter-spacing:-.2px}
+  .headline{margin:0 0 10px;font-size:16px;color:var(--muted)}
+  .affil{margin:0;font-size:14.5px}
+  .affil .org{font-weight:600}
+  .btnrow{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);border-radius:6px;padding:6px 15px;font-size:13.5px;
+       color:var(--text);background:var(--card)}
+  .btn:hover{border-color:var(--accent);text-decoration:none}
+
+  /* ---------- Sections ---------- */
+  section{margin-top:48px}
+  h2{font-family:var(--serif);font-size:21px;margin:0 0 18px;padding-bottom:8px;
+     border-bottom:1px solid var(--line);letter-spacing:.2px}
+  h2 .note{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:400;margin-left:8px}
+  p{margin:0 0 12px}
+
+  /* News */
+  .news{margin:0;padding:0;list-style:none;font-size:14.5px}
+  .news li{padding:8px 0;border-bottom:1px solid var(--line-soft);display:flex;gap:16px}
+  .news li:last-child{border-bottom:none}
+  .news .date{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* Tags */
+  .tags{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
+  .tags li{background:var(--tag-bg);color:var(--accent);border:1px solid var(--tag-border);
+           border-radius:4px;padding:3px 12px;font-size:13px}
+
+  /* Publications */
+  .pub{display:flex;gap:18px;padding:18px 0;border-bottom:1px dashed var(--line)}
+  .pub:last-child{border-bottom:none}
+  .pub .thumb{width:118px;height:78px;flex-shrink:0;border:1px solid var(--line);
+              border-radius:5px;background:var(--card);display:flex;align-items:center;
+              justify-content:center;font-size:11px;color:var(--muted);text-align:center;overflow:hidden}
+  .pub .thumb img{width:100%;height:100%;object-fit:cover}
+  .pub .body{flex:1}
+  .pub .title{font-weight:600;margin:0 0 3px;font-size:15.5px}
+  .pub .authors{margin:0;font-size:14px;color:var(--muted)}
+  .pub .authors strong{color:var(--text);font-weight:600}
+  .pub .venue{margin:2px 0 0;font-size:14px;color:var(--muted)}
+  .pub .venue i{font-style:italic}
+  .pub .links{margin-top:6px;font-size:13px;display:flex;gap:14px}
+  .selected{display:inline-block;font-size:11px;letter-spacing:.5px;color:#c9a34c;
+            border:1px solid #6b5a2a;background:#2d2712;border-radius:3px;
+            padding:0 6px;vertical-align:2px;margin-left:6px}
+  html[data-theme="light"] .selected{color:#8a6d3b;background:#fcf8e3;border-color:#f0e2bd}
+
+  /* Projects */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .proj{border:1px solid var(--line);border-radius:8px;padding:18px 20px;background:var(--card)}
+  .proj h3{margin:0 0 6px;font-size:16px;font-family:var(--serif)}
+  .proj h3 a{color:var(--text)}
+  .proj h3 a:hover{color:var(--accent);text-decoration:none}
+  .proj p{margin:0;font-size:14px;color:var(--muted)}
+
+  /* Skills */
+  .skill-row{display:flex;gap:14px;padding:8px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+  .skill-row:last-child{border-bottom:none}
+  .skill-row .cat{width:110px;flex-shrink:0;color:var(--muted)}
+  .skill-row .val{flex:1}
+
+  /* Timeline entries */
+  .entry{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .entry:last-child{border-bottom:none}
+  .entry .main{font-size:15px}
+  .entry .main span.org{font-weight:600}
+  .entry .sub{font-size:13.5px;color:var(--muted)}
+  .entry .when{font-size:13.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* Blog */
+  .post{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  .post:last-child{border-bottom:none}
+  .post .date{color:var(--muted);font-size:13.5px;white-space:nowrap}
+
+  code{background:var(--card);border:1px solid var(--line-soft);padding:1px 6px;border-radius:4px;font-size:13px}
+
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
+         font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media (max-width:680px){
+    header{flex-direction:column;text-align:center;padding-top:40px}
+    .btnrow{justify-content:center}
+    .nav-inner .links{display:none}
+    .proj-grid{grid-template-columns:1fr}
+    .pub{flex-direction:column;gap:10px}
+    .pub .thumb{width:100%;height:90px}
+    .entry,.post{flex-direction:column;gap:2px}
+    .skill-row{flex-direction:column;gap:2px}
   }
-  h1 { margin: 20px 0 6px; font-size: 28px; }
-  .tagline { color: var(--muted); margin: 0; }
-  .links { margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .links a {
-    color: var(--text); text-decoration: none;
-    border: 1px solid var(--border); border-radius: 20px;
-    padding: 6px 16px; font-size: 14px; transition: .2s;
-  }
-  .links a:hover { border-color: var(--accent); color: var(--accent); }
-  section { margin-bottom: 40px; }
-  h2 {
-    font-size: 18px; padding-bottom: 8px; margin-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px 20px; margin-bottom: 12px;
-  }
-  .card h3 { margin: 0 0 6px; font-size: 16px; }
-  .card h3 a { color: var(--accent); text-decoration: none; }
-  .card p { margin: 0; color: var(--muted); font-size: 14px; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); padding-top: 20px; }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <img class="avatar" src="https://github.com/GT-Bloom1.png" alt="avatar">
-    <h1>GT-Bloom1</h1>
-    <p class="tagline">Research on Spiking Neural Networks / Efficient AI</p>
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">GT-Bloom1</a>
     <div class="links">
-      <a href="https://github.com/GT-Bloom1">GitHub</a>
-      <a href="mailto:your-email@example.com">Email</a>
+      <a href="#news">News</a>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="切换明暗">◐</button>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <img class="avatar" src="https://github.com/GT-Bloom1.png" alt="GT-Bloom1">
+    <div>
+      <h1>GT-Bloom1</h1>
+      <p class="headline">Research on Spiking Neural Networks &amp; Efficient AI</p>
+      <p class="affil">
+        <span class="org">Your University</span> · Department of Computer Science<br>
+        <span class="org">XXX Lab</span> · Advisor: Prof. Xxx
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="https://github.com/GT-Bloom1">GitHub</a>
+        <a class="btn" href="#">Google Scholar</a>
+        <a class="btn" href="#">CV (PDF)</a>
+        <a class="btn" href="mailto:your-email@example.com">Email</a>
+      </div>
     </div>
   </header>
 
-  <section>
+  <!-- ================= NEWS ================= -->
+  <section id="news">
+    <h2>News</h2>
+    <ul class="news">
+      <li><span class="date">2026-10</span><span>个人学术主页上线 🎉</span></li>
+      <li><span class="date">2026-09</span><span>Spiking Transformer 剪枝工作整理投稿中。</span></li>
+      <li><span class="date">2026-06</span><span>开始基于 Spikingformer 做 token 剪枝研究。</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
     <h2>About</h2>
-    <div class="card">
-      <p>这里写一段自我介绍：你的学校 / 方向 / 兴趣。</p>
+    <p>
+      我是 <strong>Your University</strong> 计算机系的 <strong>Master / PhD student</strong>，师从 Prof. Xxx，
+      隶属于 XXX Lab。研究兴趣集中在 <strong>脉冲神经网络（SNN）</strong>与高效机器学习，
+      尤其关注 Spiking Transformer 的结构压缩与推理加速。
+    </p>
+    <p>
+      此前在 <strong>XXX University</strong> 获得学士学位（2025）。我的目标是让类脑模型以尽可能少的
+      计算与能耗，在真实硬件上跑得更快、更远。业余时间喜欢开源、打比赛和写博客。
+    </p>
+  </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section id="research">
+    <h2>Research Interests</h2>
+    <ul class="tags">
+      <li>Spiking Neural Networks</li>
+      <li>Spiking Transformer</li>
+      <li>Token / Model Pruning</li>
+      <li>Efficient Inference</li>
+      <li>Model Compression</li>
+      <li>Neuromorphic Computing</li>
+      <li>Representation Learning</li>
+    </ul>
+  </section>
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section id="publications">
+    <h2>Publications <span class="note">* 表示共同一作；引用格式见各条 BibTeX</span></h2>
+
+    <div class="pub">
+      <div class="thumb">teaser / figure</div>
+      <div class="body">
+        <p class="title">Token Pruning for Spiking Transformers<span class="selected">Under Review</span></p>
+        <p class="authors"><strong>Your Name</strong>*, Coauthor A*, Advisor B</p>
+        <p class="venue"><i>Target: NeurIPS / ICLR</i>, 2026</p>
+        <p class="links"><a href="#">PDF</a><a href="#">Code</a><a href="#">arXiv</a><a href="#">BibTeX</a></p>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="thumb">teaser / figure</div>
+      <div class="body">
+        <p class="title">Efficient Spiking Representation Learning</p>
+        <p class="authors">Coauthor A, <strong>Your Name</strong>, Advisor B</p>
+        <p class="venue"><i>Conference / Journal</i>, 2025</p>
+        <p class="links"><a href="#">PDF</a><a href="#">Code</a><a href="#">BibTeX</a></p>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="thumb">teaser / figure</div>
+      <div class="body">
+        <p class="title">A Survey on Energy-Efficient Neuromorphic Models</p>
+        <p class="authors"><strong>Your Name</strong>, Advisor B</p>
+        <p class="venue"><i>Preprint</i>, 2025</p>
+        <p class="links"><a href="#">arXiv</a><a href="#">BibTeX</a></p>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Research</h2>
-    <div class="card">
-      <h3>Spiking Transformer Token Pruning</h3>
-      <p>基于 Spikingformer 的 token 剪枝方法，降低脉冲 Transformer 的计算开销。</p>
-    </div>
-  </section>
-
-  <section>
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
     <h2>Projects</h2>
-    <div class="card">
-      <h3><a href="https://github.com/GT-Bloom1">项目名</a></h3>
-      <p>一句话项目描述。</p>
+    <div class="proj-grid">
+      <div class="proj">
+        <h3><a href="https://github.com/GT-Bloom1">Spiking Token Pruning</a></h3>
+        <p>在 Spikingformer 的 SpikingSelfAttention 上对 token 维度做剪枝，几乎不掉点的前提下显著降低 SOPs 与推理延迟。支持 CIFAR-10 / CIFAR-100 / ImageNet。</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/GT-Bloom1">SNN Benchmark Toolkit</a></h3>
+        <p>统一的脉冲网络能耗 / 延迟评测工具，支持多硬件后端估计。</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/GT-Bloom1">Project C</a></h3>
+        <p>一句话项目描述。</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/GT-Bloom1">Project D</a></h3>
+        <p>一句话项目描述。</p>
+      </div>
     </div>
   </section>
 
-  <footer>© 2026 GT-Bloom1 · Hosted on GitHub Pages</footer>
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill-row"><div class="cat">Languages</div><div class="val">Python, C/C++, Bash, LaTeX</div></div>
+    <div class="skill-row"><div class="cat">Frameworks</div><div class="val">PyTorch, SpikingJelly, timm, Hugging Face</div></div>
+    <div class="skill-row"><div class="cat">Tools</div><div class="val">Git, Linux, Slurm, WandB, Docker</div></div>
+    <div class="skill-row"><div class="cat">Others</div><div class="val">CUDA / GPU 集群训练, 实验管理</div></div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="entry">
+      <div>
+        <div class="main"><span class="org">Your University</span> — M.S./Ph.D. in Computer Science</div>
+        <div class="sub">Advisor: Prof. Xxx · XXX Lab</div>
+      </div>
+      <div class="when">2025 — Present</div>
+    </div>
+    <div class="entry">
+      <div>
+        <div class="main"><span class="org">XXX University</span> — B.Eng. in Computer Science</div>
+        <div class="sub">GPA 3.x / 4.0 · 毕业论文：XXX</div>
+      </div>
+      <div class="when">2021 — 2025</div>
+    </div>
+  </section>
+
+  <!-- ================= AWARDS ================= -->
+  <section id="awards">
+    <h2>Awards &amp; Honors</h2>
+    <div class="entry"><div class="main">国家奖学金 / National Scholarship</div><div class="when">2024</div></div>
+    <div class="entry"><div class="main">优秀毕业生 / Outstanding Graduate</div><div class="when">2025</div></div>
+    <div class="entry"><div class="main">XXX 竞赛一等奖</div><div class="when">2023</div></div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="entry">
+      <div>
+        <div class="main"><span class="org">XX 公司 / 实验室</span> — 研究实习生</div>
+        <div class="sub">参与 XXX 项目，负责模型压缩与部署。</div>
+      </div>
+      <div class="when">2024.06 — 2024.09</div>
+    </div>
+    <div class="entry">
+      <div>
+        <div class="main"><span class="org">XXX Lab</span> — 科研助理</div>
+        <div class="sub">SNN 训练流程搭建与实验复现。</div>
+      </div>
+      <div class="when">2023.09 — 2024.05</div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICE ================= -->
+  <section id="service">
+    <h2>Academic Service</h2>
+    <div class="entry"><div class="main">Reviewer — <i>NeurIPS / ICLR / ICML / AAAI</i></div><div class="when">2026 —</div></div>
+    <div class="entry"><div class="main">Teaching Assistant — 《机器学习导论》</div><div class="when">2025 Fall</div></div>
+  </section>
+
+  <!-- ================= BLOG ================= -->
+  <section id="blog">
+    <h2>Blog <span class="note">学习笔记 / 论文阅读</span></h2>
+    <div class="post">
+      <div><a href="#">Spikingformer 代码结构精读：从 LIF 到 SpikingSelfAttention</a></div>
+      <div class="date">2026-09-20</div>
+    </div>
+    <div class="post">
+      <div><a href="#">Token 剪枝方法综述：从 ViT 到 Spiking Transformer</a></div>
+      <div class="date">2026-08-11</div>
+    </div>
+    <div class="post">
+      <div><a href="#">CIFAR-10 训练记录与复现细节</a></div>
+      <div class="date">2026-07-02</div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      Email: <a href="mailto:your-email@example.com">your-email@example.com</a><br>
+      Office: Room A-000, Building X, Your University<br>
+      GitHub: <a href="https://github.com/GT-Bloom1">github.com/GT-Bloom1</a>
+    </p>
+    <p class="note">欢迎就 SNN / 高效推理方向的合作交流与我联系。</p>
+  </section>
+
+  <footer>
+    <span>© 2026 GT-Bloom1 · Last updated Oct 2026</span>
+    <span>Hosted on GitHub Pages</span>
+  </footer>
 
 </div>
+
+<script>
+  function toggleTheme(){
+    const el=document.documentElement;
+    const next=el.getAttribute('data-theme')==='dark'?'light':'dark';
+    el.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next)}catch(e){}
+  }
+  (function(){try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+</script>
 </body>
 </html>
