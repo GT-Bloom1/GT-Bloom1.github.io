@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GT-Bloom1 | Home</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 64px 20px; }
+  header { text-align: center; margin-bottom: 48px; }
+  .avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    border: 2px solid var(--border);
+    object-fit: cover; background: var(--card);
+  }
+  h1 { margin: 20px 0 6px; font-size: 28px; }
+  .tagline { color: var(--muted); margin: 0; }
+  .links { margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .links a {
+    color: var(--text); text-decoration: none;
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 6px 16px; font-size: 14px; transition: .2s;
+  }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 18px; padding-bottom: 8px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px; margin-bottom: 12px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card h3 a { color: var(--accent); text-decoration: none; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img class="avatar" src="https://github.com/GT-Bloom1.png" alt="avatar">
+    <h1>GT-Bloom1</h1>
+    <p class="tagline">Research on Spiking Neural Networks / Efficient AI</p>
+    <div class="links">
+      <a href="https://github.com/GT-Bloom1">GitHub</a>
+      <a href="mailto:your-email@example.com">Email</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>About</h2>
+    <div class="card">
+      <p>这里写一段自我介绍：你的学校 / 方向 / 兴趣。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Research</h2>
+    <div class="card">
+      <h3>Spiking Transformer Token Pruning</h3>
+      <p>基于 Spikingformer 的 token 剪枝方法，降低脉冲 Transformer 的计算开销。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="card">
+      <h3><a href="https://github.com/GT-Bloom1">项目名</a></h3>
+      <p>一句话项目描述。</p>
+    </div>
+  </section>
+
+  <footer>© 2026 GT-Bloom1 · Hosted on GitHub Pages</footer>
+
+</div>
+</body>
+</html>
