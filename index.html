@@ -120,6 +120,19 @@
 
   code{background:var(--card);border:1px solid var(--line-soft);padding:1px 6px;border-radius:4px;font-size:13px}
 
+  /* Progress bars & stats */
+  .bars{margin:0 0 16px;padding:0;list-style:none}
+  .bars li{padding:9px 0;font-size:14.5px}
+  .bar-head{display:flex;justify-content:space-between;margin-bottom:5px}
+  .bar-head .num{color:var(--muted);font-variant-numeric:tabular-nums}
+  .bar{height:9px;border-radius:5px;background:var(--card);border:1px solid var(--line-soft);overflow:hidden}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,#3fb950,#58a6ff)}
+  .kw{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin:0;padding:0;list-style:none}
+  .kw li{font-size:14.5px;color:var(--muted)}
+  .kw b{color:var(--text);font-weight:600}
+  .stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat-cards img{width:100%;border:1px solid var(--line);border-radius:8px}
+
   footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
          font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
@@ -132,6 +145,7 @@
     .pub .thumb{width:100%;height:90px}
     .entry,.post{flex-direction:column;gap:2px}
     .skill-row{flex-direction:column;gap:2px}
+    .stat-cards,.kw{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -147,6 +161,8 @@
       <a href="#research">Research</a>
       <a href="#publications">Publications</a>
       <a href="#projects">Projects</a>
+      <a href="#objective">求职</a>
+      <a href="#practice">刷题战绩</a>
       <a href="#education">Education</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
@@ -269,6 +285,54 @@
         <h3><a href="https://github.com/GT-Bloom1">Project D</a></h3>
         <p>一句话项目描述。</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= JOB OBJECTIVE ================= -->
+  <section id="objective">
+    <h2>Job Objective <span class="note">求职意向</span></h2>
+    <ul class="kw">
+      <li>意向岗位：<b>算法工程师（模型压缩 / 高效推理方向）</b></li>
+      <li>备选岗位：<b>研究实习生 / Research Intern（SNN · Efficient AI）</b></li>
+      <li>意向时间：<b>2027 暑期实习 / 2028 届校招</b></li>
+      <li>意向地点：<b>北上广深 · 杭州 · 可远程</b></li>
+      <li>到岗状态：<b>可实习 3–6 个月，每周 5 天</b></li>
+      <li>简历：<b><a href="#">PDF 下载</a></b></li>
+    </ul>
+  </section>
+
+  <!-- ================= CODING PRACTICE ================= -->
+  <section id="practice">
+    <h2>Coding Practice <span class="note">刷题 &amp; 战绩</span></h2>
+    <ul class="bars">
+      <li>
+        <div class="bar-head"><span>LeetCode 总题量</span><span class="num">300 / 500</span></div>
+        <div class="bar"><i style="width:60%"></i></div>
+      </li>
+      <li>
+        <div class="bar-head"><span>Easy</span><span class="num">150</span></div>
+        <div class="bar"><i style="width:75%;background:linear-gradient(90deg,#3fb950,#a4e19a)"></i></div>
+      </li>
+      <li>
+        <div class="bar-head"><span>Medium</span><span class="num">130</span></div>
+        <div class="bar"><i style="width:52%;background:linear-gradient(90deg,#d29922,#eac54f)"></i></div>
+      </li>
+      <li>
+        <div class="bar-head"><span>Hard</span><span class="num">20</span></div>
+        <div class="bar"><i style="width:40%;background:linear-gradient(90deg,#f85149,#ff8b85)"></i></div>
+      </li>
+    </ul>
+    <div class="entry"><div class="main">LeetCode 周赛 — 最高排名 <b>xxx</b> / Rating <b>1xxx</b></div><div class="when">2026</div></div>
+    <div class="entry"><div class="main">蓝桥杯 / CCPC / ICPC — <b>XX 省一等奖</b></div><div class="when">2024</div></div>
+    <div class="entry"><div class="main">牛客 / Codeforces — <b>最高 Rating xxxx (XXXX)</b></div><div class="when">2023</div></div>
+  </section>
+
+  <!-- ================= GITHUB STATS ================= -->
+  <section id="stats">
+    <h2>GitHub Stats <span class="note">自动统计，无需维护</span></h2>
+    <div class="stat-cards">
+      <img src="https://github-readme-stats.vercel.app/api?username=GT-Bloom1&show_icons=true" alt="GitHub stats" loading="lazy">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GT-Bloom1&layout=compact" alt="Top languages" loading="lazy">
     </div>
   </section>
 
